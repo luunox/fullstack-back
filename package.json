@@ -2,10 +2,10 @@
 	"name": "01-socket-server-basic",
 	"version": "1.0.0",
 	"description": "",
-	"main": "src/index.js",
+	"main": "index.js",
 	"scripts": {
-		"dev": "nodemon",
-		"start": "node"
+		"dev": "nodemon src/",
+		"start": "node src/"
 	},
 	"author": "",
 	"license": "ISC",
