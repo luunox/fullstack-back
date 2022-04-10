@@ -40,7 +40,7 @@ module.exports = function (app) {
 			if (error) return res.json({ code: error.code, message: error.message });
 
 			let suma = 0;
-			rows.forEach((dat) => (suma += hoy.diff(dat.nacimiento, 'years')));
+			rows.forEach((dat) => hoy.diff(dat.nacimiento, 'years') > 0 && (suma += hoy.diff(dat.nacimiento, 'years')));
 
 			res.json({
 				data: +(Math.round(suma / rows.length + 'e+0') + 'e-0'),
