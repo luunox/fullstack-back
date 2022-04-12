@@ -45,7 +45,7 @@ module.exports = function (app) {
 			arrFilter.forEach((dat) => (suma += hoy.diff(dat.nacimiento, 'years')));
 
 			res.json({
-				data: +(Math.round(suma / arrFilter.length + 'e+1') + 'e-1'),
+				data: +(Math.round(suma / arrFilter.length + 'e+2') + 'e-2'),
 				title: 'Cliente creado',
 				message: 'Se agregaron los datos',
 			});
