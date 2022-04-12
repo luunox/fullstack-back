@@ -36,7 +36,7 @@ module.exports = function (app) {
 	app.get('/promedio_edades', async (req, res) => {
 		const hoy = moment(new Date());
 
-		db.query('select nacimiento from users', null, function (error, rows = [], fields) {
+		db.query('select nacimiento from users', null, function (error, rows, fields) {
 			if (error) return res.json({ code: error.code, message: error.message });
 
 			let suma = 0;
@@ -45,6 +45,7 @@ module.exports = function (app) {
 			arrFilter.forEach((dat) => (suma += hoy.diff(dat.nacimiento, 'years')));
 
 			res.json({
+				arr: arrFilter,
 				data: +(Math.round(suma / rows.length + 'e+0') + 'e-0'),
 				title: 'Cliente creado',
 				message: 'Se agregaron los datos',
