@@ -43,7 +43,7 @@ module.exports = function (app) {
 			rows.forEach((dat) => hoy.diff(dat.nacimiento, 'years') >= 1 && (suma += hoy.diff(dat.nacimiento, 'years')));
 
 			res.json({
-				data: +(Math.round(suma / rows.length + 'e+0') + 'e-0'),
+				datacaca: +(Math.round(suma / rows.length + 'e+0') + 'e-0'),
 				title: 'Cliente creado',
 				message: 'Se agregaron los datos',
 			});
