@@ -36,14 +36,16 @@ module.exports = function (app) {
 	app.get('/promedio_edades', async (req, res) => {
 		const hoy = moment(new Date());
 
-		db.query('select nacimiento from users', null, function (error, rows, fields) {
+		db.query('select nacimiento from users', null, function (error, rows = [], fields) {
 			if (error) return res.json({ code: error.code, message: error.message });
 
 			let suma = 0;
-			rows.forEach((dat) => hoy.diff(dat.nacimiento, 'years') >= 1 && (suma += hoy.diff(dat.nacimiento, 'years')));
+			const arrFilter = rows.filter((dat) => hoy.diff(dat.nacimiento, 'years') > 0);
+
+			arrFilter.forEach((dat) => (suma += hoy.diff(dat.nacimiento, 'years')));
 
 			res.json({
-				datacaca: +(Math.round(suma / rows.length + 'e+0') + 'e-0'),
+				data: +(Math.round(suma / rows.length + 'e+0') + 'e-0'),
 				title: 'Cliente creado',
 				message: 'Se agregaron los datos',
 			});
