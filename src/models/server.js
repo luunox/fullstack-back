@@ -4,9 +4,9 @@ const cors = require('cors');
 const morgan = require('morgan');
 const express = require('express');
 const Sockets = require('./sockets');
-const { Server: servidor } = require('socket.io');
+// const { Server: servidor } = require('socket.io');
 
-const helmet = require('helmet');
+// const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 
 const whitelist = ['.*', '.*dominio-regex.com']; //urls permitidas a interactuar con el api
@@ -30,12 +30,11 @@ class Server {
 		this.server = http.createServer(this.app);
 
 		// Configuración del Socket Server
-		this.io = new servidor(this.server);
+		// this.io = new servidor(this.server);
 	}
 
 	middlewares() {
 		// Seguridad
-		// this.app.use(cors());
 		this.app.use(limiter);
 		// this.app.use(helmet());
 		this.app.options('*', cors());
@@ -59,16 +58,16 @@ class Server {
 		this.app.use(express.static(path.resolve(__dirname, '../public')));
 	}
 
-	configurarSockets() {
-		new Sockets(this.io);
-	}
+	// configurarSockets() {
+	// 	new Sockets(this.io);
+	// }
 
 	execute() {
 		// Inicializar Middlewares
 		this.middlewares();
 
 		// Inicializar Sockets
-		this.configurarSockets();
+		// this.configurarSockets();
 
 		// Routes
 		require('../routes/knox.routes')(this.app);
